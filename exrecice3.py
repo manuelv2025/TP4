@@ -9,13 +9,13 @@ class Cercle:
 
     def calcul_aire(self):
         self.aire = pi * self.rayon * self.rayon
-        print(f"L'aire du cercle est {self.aire}")
+        return self.aire
 
     def calcul_circonference(self):
         self.circonference = 2.0 * pi * self.rayon
-        print(f"La circonference du cercle est {self.circonference}")
+        return self.circonference
 
 
 cercle = Cercle(input("Quel est le rayon du cercle? "))
-cercle.calcul_aire()
-cercle.calcul_circonference()
+print(f"L'aire du cercle est {cercle.calcul_aire()}")
+print(f"La circonference du cercle est {cercle.calcul_circonference()}")
