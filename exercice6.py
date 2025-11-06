@@ -19,6 +19,7 @@ class Hero:
         self.force_defense = random.randint(1, 6)
         self.nom_hero = nom
         self.qte_dommage = 0
+        self.sagesse = Personnage.sagesse
 
     def faire_attaque(self):
         return self.force_attaque + random.randint(1, 6)
@@ -29,3 +30,4 @@ class Hero:
 
     def est_vivant(self):
         return self.nb_point_vie > 0
+
