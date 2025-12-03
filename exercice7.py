@@ -46,7 +46,17 @@ class Kobold(NPC):
 
     def attaquer(self, cible):
         self.cible = cible
-        cible.subir_degat(random.randint(1, 6))
+        print(cible)
+        lance_de = random.randint(1, 20)
+        if lance_de == 20:
+            cible.subir_degat(random.randint(1, 8))
+        elif lance_de == 1:
+            cible.subir_degat(0)
+        else:
+            if lance_de > cible.armure:
+                cible.subir_degat(random.randint(1, 6))
+            else:
+                cible.subir_degat(0)
 
     def subir_degat(self, degat):
         self.pv -= degat
@@ -60,7 +70,16 @@ class Hero(NPC):
 
     def attaquer(self, cible):
         self.cible = cible
-        cible.subir_degat(random.randint(1, 6))
+        lance_de = random.randint(1, 20)
+        if lance_de == 20:
+            cible.subir_degat(random.randint(1, 8))
+        elif lance_de == 1:
+            cible.subir_degat(0)
+        else:
+            if lance_de > cible.armure:
+                cible.subir_degat(random.randint(1, 6))
+            else:
+                cible.subir_degat(0)
 
     def subir_degat(self, degat):
         self.pv -= degat
