@@ -1,4 +1,5 @@
 import random
+from dataclasses import dataclass
 
 
 def choisir_valeur():
@@ -9,7 +10,7 @@ def choisir_valeur():
 
 
 class NPC:
-    def __init__(self, nom, race, espece, profession):
+    def __init__(self, nom, race, espece, profession, alignement):
         self.force = choisir_valeur()
         self.agilite = choisir_valeur()
         self.constitution = choisir_valeur()
@@ -23,6 +24,7 @@ class NPC:
         self.pv = random.randint(1, 20)
         self.profession = profession
         self.statut_vie = "vivant"
+        self.alignement = alignement
 
     def afficher_carcteristique(self):
         print(f"Votre force est de {self.force}")
@@ -47,7 +49,7 @@ class NPC:
 
 class Kobold(NPC):
     def __init__(self, nom, espece, profession):
-        super().__init__(nom, "kobold", espece, profession)
+        super().__init__(nom, "kobold", espece, profession, "neutral evil")
         self.cible = ""
         self.degat = 0
 
@@ -71,7 +73,7 @@ class Kobold(NPC):
 
 class Hero(NPC):
     def __init__(self, nom, race, espece, profession):
-        super().__init__(nom, race, espece, profession)
+        super().__init__(nom, race, espece, profession, "lawful good")
         self.cible = ""
         self.degat = 0
 
@@ -93,15 +95,43 @@ class Hero(NPC):
 
 
 class Enum:
+    def __init__(self):
+        self.alignement = []
+        self.element = "non défini"
+        for i in ["lawful", "neutral", "chaotic"]:
+            for j in ["evil", "neutral", "good"]:
+                self.alignement.append(i + " " + j)
+        self.alignement[4] = "true neutral"
 
 
-class Sac_à_dos:
+@dataclass
+class Item:
+    def __init__(self):
+        self.quantite = int
+        self.nom_item = str
+
+
+class Sacados:
 
     def __init__(self):
         self.liste = []
 
     def ajouter_item(self, item):
-        self.liste.append(item)
+        trouver = False
+        for i in self.liste:
+            if i.nom_item == item.nom_item:
+                trouver = True
+                i.quantite += item.quantite
+        if not trouver:
+            self.liste.append(item)
 
-    def retirer_item(self, ):
+
+    def retirer_item(self, item):
+        trouver = False
+        for i in self.liste:
+            if i.nom_item == item.nom_item:
+                trouver = True
+                i.quantite -= item.quantite
+        if not trouver:
+            print("Vous ne pouvez pas retirer quelque chose qui n'est pas là.")
 
